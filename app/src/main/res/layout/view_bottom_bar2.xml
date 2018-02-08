@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/rl_bottom_bar"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:clipChildren="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+
+        <bottombar.xz.com.bottombar.BottomBarItem
+            android:id="@+id/bbi_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <bottombar.xz.com.bottombar.BottomBarItem
+            android:id="@+id/bbi_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <bottombar.xz.com.bottombar.BottomBarItem
+            android:id="@+id/bbi_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <bottombar.xz.com.bottombar.BottomBarItem
+            android:id="@+id/bbi_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <bottombar.xz.com.bottombar.BottomBarItem
+            android:id="@+id/bbi_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</RelativeLayout>

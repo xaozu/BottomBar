@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_bottom_bar"
+    style="@style/style_bottom_bar_rl">
+
+    <ImageView
+        android:id="@+id/iv_bottom_bar"
+        style="@style/style_bottom_bar_iv"
+        android:background="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/tv_bottom_bar"
+        style="@style/style_bottom_bar_tv"
+        android:layout_below="@+id/iv_bottom_bar"
+        android:text="导航"/>
+
+    <TextView
+        android:id="@+id/tv_bottom_bar_num"
+        style="@style/style_tv_red_dot"
+        android:layout_toRightOf="@+id/iv_bottom_bar"
+        android:text="1"
+        android:visibility="gone"
+        android:layout_toEndOf="@+id/iv_bottom_bar"/>
+
+    <View
+        android:id="@+id/view_bottom_bar_dot"
+        style="@style/style_view_red_dot"
+        android:layout_toRightOf="@+id/iv_bottom_bar"
+        android:visibility="gone"
+        android:layout_toEndOf="@+id/iv_bottom_bar"/>
+
+</RelativeLayout>
