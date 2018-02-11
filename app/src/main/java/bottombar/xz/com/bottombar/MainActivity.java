@@ -2,6 +2,7 @@ package bottombar.xz.com.bottombar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
         bottomBarView = findViewById(R.id.bbv);
         createData();
-
-
     }
 
     public void createData(){
-        List<BottomBarBean> bottomBarBeans = new ArrayList<>();
+        final List<BottomBarBean> bottomBarBeans = new ArrayList<>();
 
         BottomBarBean bean1 = new BottomBarBean();
         bean1.setText("首页");
@@ -60,6 +59,12 @@ public class MainActivity extends AppCompatActivity {
 
         bottomBarView.setCheck(0);
 
+        bottomBarView.setOnBottomBarSelectListener(new OnBottomBarSelectListener() {
+            @Override
+            public void onSelect(int index) {
+                Toast.makeText(getApplicationContext(), bottomBarBeans.get(index).getText(), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
