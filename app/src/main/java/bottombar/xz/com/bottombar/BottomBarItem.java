@@ -57,6 +57,9 @@ public class BottomBarItem extends RelativeLayout implements BottomBarItemInterf
         redDot = view.findViewById(R.id.view_bottom_bar_dot);
         tvRedNumDot = view.findViewById(R.id.tv_bottom_bar_num);
 
+        setFocusable(true);
+        setClickable(true);
+
     }
 
 
@@ -87,7 +90,7 @@ public class BottomBarItem extends RelativeLayout implements BottomBarItemInterf
     @Override
     public void setLocalTextColor(int defColor, int selectColor) {
         int def = getContext().getResources().getColor(defColor);
-        int checked = getContext().getResources().getColor(defColor);
+        int checked = getContext().getResources().getColor(selectColor);
         text.setTextColor(BottomBarHelper.getInstance().getColorStateList(def, checked));
     }
 
@@ -149,8 +152,5 @@ public class BottomBarItem extends RelativeLayout implements BottomBarItemInterf
         tvRedNumDot.setVisibility(GONE);
     }
 
-    @Override
-    public void setOnclickListener(OnClickListener listener) {
-        rlRoot.setOnClickListener(listener);
-    }
+
 }

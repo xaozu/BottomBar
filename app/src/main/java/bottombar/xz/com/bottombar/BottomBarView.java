@@ -1,11 +1,14 @@
 package bottombar.xz.com.bottombar;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +26,7 @@ import java.util.List;
  * describe: 底部导航
  */
 
-public class BottomBarView extends LinearLayout implements BottomBarViewInterface{
+public class BottomBarView extends RelativeLayout implements BottomBarViewInterface{
 
     /**
      * 数据
@@ -63,6 +66,10 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
      */
     private int currentSelectIndex = 0;
 
+    private int height;
+
+    private LinearLayout linearLayoutRoot;
+
     public BottomBarView(Context context) {
         super(context);
         initView(context);
@@ -90,15 +97,50 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
      * 初始化控件
      */
     private void initView(Context context){
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.view_bottom_bar2, this);
+        this.setClipChildren(false);
+        this.setClipToPadding(false);
+        setGravity(ALIGN_BOTTOM);
 
-        mBottomBarItems.add((BottomBarItem) view.findViewById(R.id.bbi_1));
-        mBottomBarItems.add((BottomBarItem) view.findViewById(R.id.bbi_2));
-        mBottomBarItems.add((BottomBarItem) view.findViewById(R.id.bbi_3));
-        mBottomBarItems.add((BottomBarItem) view.findViewById(R.id.bbi_4));
-        mBottomBarItems.add((BottomBarItem) view.findViewById(R.id.bbi_5));
+        linearLayoutRoot = new LinearLayout(context);
+        this.addView(linearLayoutRoot);
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        height = (int) (dm.heightPixels * 0.07); // 高度的7%
+        LayoutParams layoutParams = (LayoutParams) linearLayoutRoot.getLayoutParams();
+        layoutParams.height = height;
+        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        linearLayoutRoot.setLayoutParams(layoutParams);
+        linearLayoutRoot.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayoutRoot.setBackgroundColor(Color.parseColor("#EEEEEE"));
+    }
 
+    /**
+     * 创建单个选项
+     * @return 控件
+     */
+    private BottomBarItem createItem(BottomBarBean bean){
+        BottomBarItem item = new BottomBarItem(getContext());
+        linearLayoutRoot.addView(item);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) item.getLayoutParams();
+        params.weight = 1.0f;
+        params.width = 0;
+
+        params.gravity = Gravity.BOTTOM;
+        // 如果是中间大图标
+        // 区分大图标与小图标的大小变化
+        if(bean.isCenterBigIcon()){
+            params.height = (int) (height * 1.3);
+            ViewGroup.LayoutParams layoutParams = getLayoutParams();
+            layoutParams.height = (int) (height * 1.3);
+            setLayoutParams(layoutParams);
+            item.setIconSize((int) (height * 0.8), (int) (height * 0.8));
+        } else {
+            params.height = LayoutParams.MATCH_PARENT;
+            item.setIconSize((int) (height * 0.5), (int) (height * 0.5));
+        }
+        item.setLayoutParams(params);
+        mBottomBarItems.add(item);
+        return item;
     }
 
     /**
@@ -107,11 +149,11 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
      */
     public void bindData(List<BottomBarBean> mBottomBarData){
         this.mBottomBarData = mBottomBarData;
-        if(mBottomBarData != null && mBottomBarData.size() == mBottomBarItems.size()){
-           for (int i = 0; i<mBottomBarData.size(); i++){
+        if(mBottomBarData != null){
+           for (int i = 0; i < mBottomBarData.size(); i++){
                BottomBarBean bean = mBottomBarData.get(i);
-               BottomBarItem item = mBottomBarItems.get(i);
-               if(bean!=null && item != null) {
+               BottomBarItem item = createItem(bean);
+               if(bean!=null) {
                    bindData(bean, item);
                    setOnclickListener(item, i);
                }
@@ -126,6 +168,8 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
      * @param item 控件
      */
     private void bindData(BottomBarBean bean, BottomBarItem item){
+        // 默认不选中
+        item.setCheck(false);
         // 文本显示
         if(TextUtils.isEmpty(bean.getText())){
             item.setTextShow(false);
@@ -143,15 +187,6 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
             item.setLocalIcon(bean.getDefaultIcon(), bean.getDefaultSelectIcon());
         }
 
-        // 如果是中间大图标
-        // 区分大图标与小图标的大小变化
-        if(bean.isCenterBigIcon()){
-            item.setRootSize(BottomBarItem.NONE, 100);
-            item.setIconSize(72, 72);
-        } else {
-            item.setIconSize(50, 50);
-        }
-
     }
 
     /**
@@ -160,7 +195,7 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
      * @param index 下标
      */
     public void setOnclickListener(BottomBarItem item, final int index) {
-        item.setOnclickListener(new OnClickListener() {
+        item.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 changeSelect(index);
@@ -232,6 +267,13 @@ public class BottomBarView extends LinearLayout implements BottomBarViewInterfac
     @Override
     public void hideRedDotNum(int index) {
         mBottomBarItems.get(index).hideRedDotNumber();
+    }
+
+    @Override
+    public void setCheck(int index) {
+        if(mBottomBarItems.size() > index && index >= 0){
+            mBottomBarItems.get(index).setCheck(true);
+        }
     }
 
 }

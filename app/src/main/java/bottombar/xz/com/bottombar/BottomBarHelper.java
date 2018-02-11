@@ -70,7 +70,7 @@ public class BottomBarHelper {
         Drawable normal = idNormal == -1 ? null : context.getResources().getDrawable(idNormal);
         Drawable check = checked == -1 ? null : context.getResources().getDrawable(checked);
         bg.addState(new int[] { android.R.attr.state_enabled }, check);
-        bg.addState(new int[] { -android.R.attr.state_enabled }, normal);
+        bg.addState(new int[] { - android.R.attr.state_enabled }, normal);
         bg.addState(new int[] {}, normal);
         return bg;
     }

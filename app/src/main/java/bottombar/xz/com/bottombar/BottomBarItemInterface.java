@@ -93,9 +93,4 @@ public interface BottomBarItemInterface {
      */
     void hideRedDotNumber();
 
-    /**
-     * 监听
-     * @param listener 监听
-     */
-    void setOnclickListener(View.OnClickListener listener);
 }

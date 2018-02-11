@@ -35,4 +35,10 @@ public interface BottomBarViewInterface {
      * @param index 需要控制的item下标
      */
     void hideRedDotNum(int index);
+
+    /**
+     * 设置选中
+     * @param index 下标
+     */
+    void setCheck(int index);
 }

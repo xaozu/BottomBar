@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         BottomBarBean bean3 = new BottomBarBean();
         bean3.setCenterBigIcon(true); // 中间按钮
+        bean3.setText("听单");
         bean3.setDefaultIcon(R.mipmap.tabbar_findgoods);
         bean3.setDefaultSelectIcon(R.mipmap.tabbar_listen_order);
 
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity {
         bottomBarBeans.add(bean4);
         bottomBarBeans.add(bean5);
 
-        bottomBarView.setTextSelectorLocalColor(R.color.colorPrimary, R.color.colorAccent);
         bottomBarView.bindData(bottomBarBeans);
+        bottomBarView.setTextSelectorLocalColor(R.color.colorPrimary, R.color.colorAccent);
+
+        bottomBarView.setCheck(0);
+
 
     }
 }
