@@ -3,6 +3,7 @@ package bottombar.xz.com.bottombar;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
@@ -95,8 +96,8 @@ public class BottomBarItem extends RelativeLayout implements BottomBarItemInterf
     }
 
     @Override
-    public void setNetIcon(String defUrl, String selectUrl) {
-        // TODO 待实现
+    public void setNetIcon(Drawable defIcon, Drawable selectIcon) {
+       iv.setBackgroundDrawable(BottomBarHelper.getInstance().getSelector(defIcon, selectIcon));
     }
 
     @Override

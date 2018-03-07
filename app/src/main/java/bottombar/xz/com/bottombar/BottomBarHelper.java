@@ -66,9 +66,20 @@ public class BottomBarHelper {
      * @return 选择器
      */
     public StateListDrawable getSelector(Context context, int idNormal, int checked){
-        StateListDrawable bg=new StateListDrawable();
+
         Drawable normal = idNormal == -1 ? null : context.getResources().getDrawable(idNormal);
         Drawable check = checked == -1 ? null : context.getResources().getDrawable(checked);
+        return getSelector(normal, check);
+    }
+
+    /**
+     * 控件选择器
+     * @param normal 默认状态
+     * @param check 选中状态
+     * @return 选择器
+     */
+    public StateListDrawable getSelector(Drawable normal, Drawable check){
+        StateListDrawable bg=new StateListDrawable();
         bg.addState(new int[] { android.R.attr.state_enabled }, check);
         bg.addState(new int[] { - android.R.attr.state_enabled }, normal);
         bg.addState(new int[] {}, normal);

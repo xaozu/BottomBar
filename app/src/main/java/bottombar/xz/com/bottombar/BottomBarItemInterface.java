@@ -1,5 +1,6 @@
 package bottombar.xz.com.bottombar;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 /**
@@ -44,10 +45,10 @@ public interface BottomBarItemInterface {
 
     /**
      * 设置网络icon图片
-     * @param defUrl 默认图片
-     * @param selectUrl 选中图片
+     * @param defIcon 默认图片
+     * @param selectIcon 选中图片
      */
-    void setNetIcon(String defUrl, String selectUrl);
+    void setNetIcon(Drawable defIcon, Drawable selectIcon);
 
     /**
      * 设置本地icon图片

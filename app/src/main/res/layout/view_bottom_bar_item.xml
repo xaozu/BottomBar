@@ -19,7 +19,7 @@
         android:id="@+id/tv_bottom_bar_num"
         style="@style/style_tv_red_dot"
         android:layout_toRightOf="@+id/iv_bottom_bar"
-        android:text="1"
+        android:text="100"
         android:visibility="gone"
         android:layout_toEndOf="@+id/iv_bottom_bar"/>
 

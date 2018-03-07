@@ -180,8 +180,9 @@ public class BottomBarView extends RelativeLayout implements BottomBarViewInterf
             item.setText(bean.getText());
         }
         // 图片显示
-        if(!TextUtils.isEmpty(bean.getNetIconUrl()) && !TextUtils.isEmpty(bean.getNetSelectIconUrl())){
-            // TODO 待实现，先下载，再显示
+        if(bean.getNetIcon() != null && bean.getNetSelectIcon() != null){
+            // 先下载，再显示
+            item.setNetIcon(bean.getNetIcon(), bean.getNetSelectIcon());
         } else {
             // 本地默认图片
             item.setLocalIcon(bean.getDefaultIcon(), bean.getDefaultSelectIcon());

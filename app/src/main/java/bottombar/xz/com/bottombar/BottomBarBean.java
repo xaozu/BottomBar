@@ -1,5 +1,7 @@
 package bottombar.xz.com.bottombar;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * creator: zhulunjun
  * time:    2018/2/5
@@ -32,7 +34,24 @@ public class BottomBarBean {
      */
     private String text;
 
+    private Drawable netIcon;
+    private Drawable netSelectIcon;
 
+    public Drawable getNetIcon() {
+        return netIcon;
+    }
+
+    public void setNetIcon(Drawable netIcon) {
+        this.netIcon = netIcon;
+    }
+
+    public Drawable getNetSelectIcon() {
+        return netSelectIcon;
+    }
+
+    public void setNetSelectIcon(Drawable netSelectIcon) {
+        this.netSelectIcon = netSelectIcon;
+    }
 
     public int getDefaultIcon() {
         return defaultIcon;
